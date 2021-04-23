@@ -55,6 +55,11 @@ namespace MyFanControl
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.textBox20 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
+            this.textBox24 = new System.Windows.Forms.TextBox();
+            this.textBox23 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.textBox22 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -324,6 +329,11 @@ namespace MyFanControl
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button4);
+            this.tabPage3.Controls.Add(this.textBox24);
+            this.tabPage3.Controls.Add(this.textBox23);
+            this.tabPage3.Controls.Add(this.button3);
+            this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Controls.Add(this.textBox22);
             this.tabPage3.Controls.Add(this.label3);
             this.tabPage3.Controls.Add(this.label2);
@@ -336,6 +346,48 @@ namespace MyFanControl
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Setting";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(126, 131);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(27, 20);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "...";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // textBox24
+            // 
+            this.textBox24.Location = new System.Drawing.Point(3, 131);
+            this.textBox24.Name = "textBox24";
+            this.textBox24.Size = new System.Drawing.Size(117, 20);
+            this.textBox24.TabIndex = 9;
+            // 
+            // textBox23
+            // 
+            this.textBox23.Location = new System.Drawing.Point(3, 105);
+            this.textBox23.Name = "textBox23";
+            this.textBox23.Size = new System.Drawing.Size(117, 20);
+            this.textBox23.TabIndex = 8;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(126, 105);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(27, 20);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "...";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(3, 84);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(63, 18);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Apps runs:";
             // 
             // textBox22
             // 
@@ -426,6 +478,14 @@ namespace MyFanControl
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.TextBox textBox24;
+        private System.Windows.Forms.Button button4;
+
+        private System.Windows.Forms.TextBox textBox23;
+
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button3;
 
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox22;

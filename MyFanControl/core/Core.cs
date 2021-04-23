@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
+using Microsoft.Win32;
 using OpenHardwareMonitor.Hardware;
 
 namespace MyFanControl.core
@@ -16,6 +18,8 @@ namespace MyFanControl.core
         {
             Computer.Open();
             Reconnect();
+            AppStart();
+            SystemEvents.PowerModeChanged += OnPowerChange;
             new Thread(ThreadStart) {IsBackground = true}.Start();
         }
 
@@ -164,6 +168,30 @@ namespace MyFanControl.core
             }
 
             return maxTemp;
+        }
+
+        private static void OnPowerChange(object s, PowerModeChangedEventArgs e)
+        {
+            switch (e.Mode)
+            {
+                case PowerModes.Resume:
+                    new Thread(AppStart) {IsBackground = true}.Start();
+                    break;
+            }
+        }
+
+        private static void AppStart()
+        {
+            Process app1 = new Process {StartInfo = {FileName = Config.Setting.PathApp1}};
+            app1.Start();
+
+            Process app2 = new Process {StartInfo = {FileName = Config.Setting.PathApp2}};
+            app2.Start();
+
+            Thread.Sleep(10000);
+
+            app1.Kill();
+            app2.Kill();
         }
     }
 }

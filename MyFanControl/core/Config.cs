@@ -13,6 +13,9 @@ namespace MyFanControl.core
         public FanProfile CpuFan { get; set; }
         public FanProfile RamFan { get; set; }
 
+        public string PathApp1 { get; set; }
+        public string PathApp2 { get; set; }
+
         public static Config Setting = DefaultConfig();
 
         public static readonly string FolderPath =
@@ -54,7 +57,9 @@ namespace MyFanControl.core
                 ChipsetFanSpeed = 30,
                 TimeUpdate = 3000,
                 CpuFan = new FanProfile {MotherboardControl = false, Profile = new TempRow[5]},
-                RamFan = new FanProfile {MotherboardControl = false, Profile = new TempRow[5]}
+                RamFan = new FanProfile {MotherboardControl = false, Profile = new TempRow[5]},
+                PathApp1 = "",
+                PathApp2 = ""
             };
             config.CpuFan.Profile[0] = new TempRow {Temperature = 40, Speed = 0};
             config.CpuFan.Profile[1] = new TempRow {Temperature = 55, Speed = 30};

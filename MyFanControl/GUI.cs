@@ -58,6 +58,8 @@ namespace MyFanControl
                 config.RamFan.Profile[3].Speed = float.Parse(textBox13.Text);
                 config.RamFan.Profile[4].Temperature = int.Parse(textBox12.Text);
                 config.RamFan.Profile[4].Speed = float.Parse(textBox11.Text);
+                config.PathApp1 = textBox23.Text;
+                config.PathApp2 = textBox24.Text;
 
                 var temp = int.MinValue;
                 var speed = float.MinValue;
@@ -146,6 +148,8 @@ namespace MyFanControl
             textBox12.Text = Config.Setting.RamFan.Profile[4].Temperature.ToString();
             textBox11.Text = Config.Setting.RamFan.Profile[4].Speed.ToString(CultureInfo.CurrentCulture);
             checkBox2.Checked = Config.Setting.RamFan.MotherboardControl;
+            textBox23.Text = Config.Setting.PathApp1;
+            textBox24.Text = Config.Setting.PathApp2;
 
             var ports = FanControl.GetPortList();
             comboBox1.Items.Clear();
@@ -154,6 +158,38 @@ namespace MyFanControl
 
             textBox21.Text = Config.Setting.ChipsetFanSpeed.ToString(CultureInfo.CurrentCulture);
             textBox22.Text = Config.Setting.TimeUpdate.ToString();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog  
+            {
+                Title = @"Browse Run File",
+                
+                CheckFileExists = true,  
+                CheckPathExists = true,
+            };  
+  
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)  
+            {  
+                textBox23.Text = openFileDialog1.FileName;  
+            } 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog  
+            {
+                Title = @"Browse Run File",
+                
+                CheckFileExists = true,  
+                CheckPathExists = true,
+            };  
+  
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)  
+            {  
+                textBox24.Text = openFileDialog1.FileName;  
+            } 
         }
     }
 }

@@ -18,16 +18,17 @@ namespace MyFanControl.core
         {
             Computer.Open();
             Reconnect();
+            new Thread(ThreadStart) {IsBackground = true}.Start();
+            
             AppStart();
             SystemEvents.PowerModeChanged += OnPowerChange;
-            new Thread(ThreadStart) {IsBackground = true}.Start();
         }
 
         private static void Reconnect()
         {
             try
             {
-                if (Config.Setting.Port != null || Config.Setting.Port != "")
+                if (Config.Setting.Port != "")
                 {
                     FanControl.Connect(Config.Setting.Port);
                 }
@@ -182,16 +183,23 @@ namespace MyFanControl.core
 
         private static void AppStart()
         {
-            Process app1 = new Process {StartInfo = {FileName = Config.Setting.PathApp1}};
-            app1.Start();
+            try
+            {
+                Process app1 = new Process {StartInfo = {FileName = Config.Setting.PathApp1}};
+                app1.Start();
 
-            Process app2 = new Process {StartInfo = {FileName = Config.Setting.PathApp2}};
-            app2.Start();
+                Process app2 = new Process {StartInfo = {FileName = Config.Setting.PathApp2}};
+                app2.Start();
 
-            Thread.Sleep(10000);
+                Thread.Sleep(10000);
 
-            app1.Kill();
-            app2.Kill();
+                app1.Kill();
+                app2.Kill();
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
     }
 }

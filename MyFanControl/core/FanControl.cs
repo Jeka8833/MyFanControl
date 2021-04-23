@@ -19,7 +19,7 @@ namespace MyFanControl.core
         private static ushort _speedFan1;
         private static ushort _speedFan2;
 
-        public static void Connect(string port)
+        public static void Connect(string? port)
         {
             _port = new SerialPort {PortName = port, BaudRate = 9600, DataBits = 8, ReadTimeout = 1000};
             _port.Open();

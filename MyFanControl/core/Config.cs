@@ -10,8 +10,8 @@ namespace MyFanControl.core
         public string Port { get; set; }
         public float ChipsetFanSpeed { get; set; }
         public int TimeUpdate { get; set; }
-        public FanProfile CpuFan { get; set; }
-        public FanProfile RamFan { get; set; }
+        public FanProfile CpuFan { get; set; } = null!;
+        public FanProfile RamFan { get; set; } = null!;
 
         public string PathApp1 { get; set; }
         public string PathApp2 { get; set; }

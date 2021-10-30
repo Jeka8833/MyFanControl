@@ -8,7 +8,7 @@ namespace MyFanControl.core
 {
     public static class Core
     {
-        private static readonly Computer Computer = new Computer {CPUEnabled = true};
+        private static readonly Computer Computer = new Computer { CPUEnabled = true };
 
         private static long _lastTimeReconnect;
 
@@ -18,8 +18,8 @@ namespace MyFanControl.core
         {
             Computer.Open();
             Reconnect();
-            new Thread(ThreadStart) {IsBackground = true}.Start();
-            
+            new Thread(ThreadStart) { IsBackground = true }.Start();
+
             AppStart();
             SystemEvents.PowerModeChanged += OnPowerChange;
         }
@@ -163,7 +163,7 @@ namespace MyFanControl.core
                 {
                     if (sensor.SensorType == SensorType.Temperature && sensor.Value.HasValue)
                     {
-                        maxTemp = Math.Max(maxTemp, (int) sensor.Value.Value);
+                        maxTemp = Math.Max(maxTemp, (int)sensor.Value.Value);
                     }
                 }
             }
@@ -173,11 +173,14 @@ namespace MyFanControl.core
 
         private static void OnPowerChange(object s, PowerModeChangedEventArgs e)
         {
-            switch (e.Mode)
+            try
             {
-                case PowerModes.Resume:
-                    new Thread(AppStart) {IsBackground = true}.Start();
-                    break;
+                if (e.Mode == PowerModes.Resume)
+                    new Thread(AppStart) { IsBackground = true }.Start();
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
 
@@ -185,10 +188,10 @@ namespace MyFanControl.core
         {
             try
             {
-                Process app1 = new Process {StartInfo = {FileName = Config.Setting.PathApp1}};
+                Process app1 = new Process { StartInfo = { FileName = Config.Setting.PathApp1 } };
                 app1.Start();
 
-                Process app2 = new Process {StartInfo = {FileName = Config.Setting.PathApp2}};
+                Process app2 = new Process { StartInfo = { FileName = Config.Setting.PathApp2 } };
                 app2.Start();
 
                 Thread.Sleep(10000);

@@ -43,9 +43,9 @@ namespace MyFanControl.core
                 Directory.CreateDirectory(FolderPath);
                 File.WriteAllBytes(FolderPath + FileName, JsonSerializer.Serialize(Setting));
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                MessageBox.Show(@"Fail write or create config", @"Error");
+                MessageBox.Show(@"Fail write or create config" + exception, @"Error");
             }
         }
 

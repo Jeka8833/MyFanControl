@@ -10,8 +10,6 @@ C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Debug\System.Runti
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Debug\System.ValueTuple.xml
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Debug\Utf8Json.xml
-C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Debug\MyFanControl.csprojAssemblyReference.cache
-C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Debug\MyFanControl.exe.config
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Debug\MyFanControl.GUI.resources
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Debug\MyFanControl.Properties.Resources.resources
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Debug\MyFanControl.csproj.GenerateResource.cache
@@ -19,3 +17,7 @@ C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Debug\MyFanControl
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Debug\MyFanControl.csproj.CopyComplete
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Debug\MyFanControl.exe
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Debug\MyFanControl.pdb
+C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Debug\System.IO.Ports.dll
+C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Debug\System.IO.Ports.xml
+C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Debug\MyFanControl.csproj.AssemblyReference.cache
+C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Debug\MyFanControl.csproj.SuggestedBindingRedirects.cache

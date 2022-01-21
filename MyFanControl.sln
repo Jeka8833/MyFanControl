@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFanControl", "MyFanControl\MyFanControl.csproj", "{7E7813B2-F068-4CE5-889F-59BD511EB74A}"
 EndProject
 Global
@@ -12,5 +15,11 @@ Global
 		{7E7813B2-F068-4CE5-889F-59BD511EB74A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E7813B2-F068-4CE5-889F-59BD511EB74A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E7813B2-F068-4CE5-889F-59BD511EB74A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1ED56AE5-E35D-4744-926F-7C06F45A224D}
 	EndGlobalSection
 EndGlobal

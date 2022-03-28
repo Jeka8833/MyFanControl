@@ -3,14 +3,15 @@ C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\MyFanContr
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\MyFanControl.pdb
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\OpenHardwareMonitorLib.dll
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\System.IO.Ports.dll
+C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\System.Threading.Tasks.Extensions.dll
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\System.ValueTuple.dll
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\Utf8Json.dll
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\System.IO.Ports.xml
+C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\System.Threading.Tasks.Extensions.xml
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\System.ValueTuple.xml
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\bin\Release\Utf8Json.xml
-C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Release\MyFanControl.csproj.AssemblyReference.cache
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Release\MyFanControl.csproj.SuggestedBindingRedirects.cache
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Release\MyFanControl.GUI.resources
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Release\MyFanControl.Properties.Resources.resources
@@ -19,3 +20,4 @@ C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Release\MyFanContr
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Release\MyFanControl.csproj.CopyComplete
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Release\MyFanControl.exe
 C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Release\MyFanControl.pdb
+C:\Users\Jeka8833\RiderProjects\MyFanControl\MyFanControl\obj\Release\MyFanControl.csproj.AssemblyReference.cache

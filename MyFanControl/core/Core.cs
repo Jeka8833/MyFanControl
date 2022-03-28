@@ -18,9 +18,10 @@ namespace MyFanControl.core
         {
             Computer.Open();
             Reconnect();
-            new Thread(ThreadStart) { IsBackground = true }.Start();
 
-            AppStart();
+            new Thread(ThreadStart) { IsBackground = true }.Start();
+            new Thread(AppStart) { IsBackground = true }.Start();
+
             SystemEvents.PowerModeChanged += OnPowerChange;
         }
 
@@ -102,7 +103,8 @@ namespace MyFanControl.core
 
                                 if (!FanControl.SendPaket())
                                 {
-                                    _lastTimeReconnect = DateTime.Now.Millisecond;
+                                    Program.MenuGui?.BallonText("Fail send paket");
+                                    _lastTimeReconnect = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                                     FanControl.Disconnect();
                                 }
 
@@ -111,9 +113,10 @@ namespace MyFanControl.core
                             else
                             {
                                 Program.MenuGui?.SetState(false);
-                                if (DateTime.Now.Millisecond - _lastTimeReconnect > 60000)
+                                if (DateTimeOffset.Now.ToUnixTimeMilliseconds() - _lastTimeReconnect > 60000)
                                 {
-                                    _lastTimeReconnect = DateTime.Now.Millisecond;
+                                    _lastTimeReconnect = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                                    Program.MenuGui?.BallonText("Reconnecting...");
                                     Reconnect();
                                 }
                             }

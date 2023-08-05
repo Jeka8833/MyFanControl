@@ -10,7 +10,7 @@ namespace MyFanControl.core
     {
         public static int TimeStepping { set; get; }
 
-        private static SerialPort _port;
+        private static SerialPort? _port;
 
         private static bool _fan1Auto = true;
         private static bool _fan2Auto = true;
@@ -21,16 +21,16 @@ namespace MyFanControl.core
 
         public static void Connect(string? port)
         {
-            _port = new SerialPort {PortName = port, BaudRate = 9600, DataBits = 8, ReadTimeout = 1000};
+            _port = new SerialPort { PortName = port, BaudRate = 9600, DataBits = 8, ReadTimeout = 1000 };
             _port.Open();
-            if (SendPaket(new byte[] {0x00})) return;
+            if (SendPaket(new byte[] { 0x00 })) return;
             Disconnect();
             throw new Exception("Fail Handshake");
         }
 
         public static void Disconnect() => _port?.Close();
 
-        public static bool IsActive() => _port != null && _port.IsOpen;
+        public static bool IsActive() => _port is { IsOpen: true };
 
         public static string[] GetPortList() => SerialPort.GetPortNames();
 
@@ -58,18 +58,17 @@ namespace MyFanControl.core
 
         public static void SetSpeed(Fan fan, float speed)
         {
-            if (speed < 0 || speed > 100)
-                throw new Exception("Incorrect speed");
+            if (speed is < 0 or > 100) throw new Exception("Incorrect speed");
             switch (fan)
             {
                 case Fan.ChipsetFan:
-                    _speedFan0 = (ushort) (speed * 3.2f);
+                    _speedFan0 = (ushort)(speed * 3.2f);
                     break;
                 case Fan.CpuFan:
-                    _speedFan1 = speed == 0 ? (ushort) 0 : (ushort) (49 + speed * 2.06f);
+                    _speedFan1 = speed == 0 ? (ushort)0 : (ushort)(49 + speed * 2.06f);
                     break;
                 case Fan.RamFan:
-                    _speedFan2 = speed == 0 ? (ushort) 0 : (ushort) (60 + speed * 2.6f);
+                    _speedFan2 = speed == 0 ? (ushort)0 : (ushort)(60 + speed * 2.6f);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(fan), fan, null);
@@ -97,7 +96,7 @@ namespace MyFanControl.core
         {
             if (!IsActive()) return false;
 
-            var array = new List<byte> {0x01};
+            var array = new List<byte> { 0x01 };
             array.AddRange(ToBytes(_speedFan0));
             if (_fan1Auto)
             {
@@ -119,7 +118,7 @@ namespace MyFanControl.core
                 array.AddRange(ToBytes(_speedFan2));
             }
 
-            array.AddRange(ToBytes((ushort) TimeStepping));
+            array.AddRange(ToBytes((ushort)TimeStepping));
             return SendPaket(array.ToArray());
         }
 
@@ -132,7 +131,7 @@ namespace MyFanControl.core
                     sum += data[j];
                 var outs = new List<byte>(data.Length + 2)
                 {
-                    0xAA, (byte) (((((sum & 0x0F) ^ ((sum & 0xF0) >> 4)) & 0xF) | (data.Length << 4)) & 0xFF)
+                    0xAA, (byte)(((((sum & 0x0F) ^ ((sum & 0xF0) >> 4)) & 0xF) | (data.Length << 4)) & 0xFF)
                 };
                 outs.AddRange(data);
                 try
@@ -151,7 +150,7 @@ namespace MyFanControl.core
             return false;
         }
 
-        private static byte[] ToBytes(ushort value) => new[] {(byte) ((value & 0xFF00) >> 8), (byte) (value & 0xFF)};
+        private static byte[] ToBytes(ushort value) => new[] { (byte)((value & 0xFF00) >> 8), (byte)(value & 0xFF) };
     }
 
     public enum Fan

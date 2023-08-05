@@ -37,7 +37,7 @@ namespace MyFanControl
         public void SetState(bool state) =>
             _stateConnection.Text = state ? @"Connection successfully" : @"Connection reset";
 
-        public void BallonText(string text)
+        public void BalloonText(string text)
         {
             TrayIcon.ShowBalloonTip(5000, "Fan Control", text, ToolTipIcon.Warning);
         }

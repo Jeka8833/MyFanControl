@@ -8,9 +8,10 @@ namespace MyFanControl.core
 {
     public static class Core
     {
-        private static readonly Computer Computer = new Computer { CPUEnabled = true };
+        private static readonly Computer Computer = new() { CPUEnabled = true };
 
         private static long _lastTimeReconnect;
+        private static readonly int[] LastTemps = new int[5];
 
         public static bool IsBlock { get; set; }
 
@@ -77,7 +78,18 @@ namespace MyFanControl.core
                             if (FanControl.IsActive())
                             {
                                 Program.MenuGui?.SetState(true);
-                                int temperature = GetTemperature();
+                                var temperature = GetTemperature();
+
+                                Array.Copy(LastTemps, 1,
+                                    LastTemps, 0, LastTemps.Length - 1);
+                                LastTemps[LastTemps.Length - 1] = temperature;
+
+                                var maxTemp = int.MinValue;
+                                foreach (var value in LastTemps)
+                                {
+                                    maxTemp = Math.Max(maxTemp, value);
+                                }
+                                
                                 FanControl.SetSpeed(Fan.ChipsetFan, Config.Setting.ChipsetFanSpeed);
                                 if (Config.Setting.CpuFan.MotherboardControl)
                                 {
@@ -87,7 +99,7 @@ namespace MyFanControl.core
                                 {
                                     FanControl.SetMotherboardControl(Fan.CpuFan, false);
                                     FanControl.SetSpeed(Fan.CpuFan,
-                                        GetSpeed(Config.Setting.CpuFan.Profile, temperature));
+                                        GetSpeed(Config.Setting.CpuFan.Profile, maxTemp));
                                 }
 
                                 if (Config.Setting.RamFan.MotherboardControl)
@@ -98,12 +110,12 @@ namespace MyFanControl.core
                                 {
                                     FanControl.SetMotherboardControl(Fan.RamFan, false);
                                     FanControl.SetSpeed(Fan.RamFan,
-                                        GetSpeed(Config.Setting.RamFan.Profile, temperature));
+                                        GetSpeed(Config.Setting.RamFan.Profile, maxTemp));
                                 }
 
                                 if (!FanControl.SendPaket())
                                 {
-                                    Program.MenuGui?.BallonText("Fail send paket");
+                                    Program.MenuGui?.BalloonText("Fail send paket");
                                     _lastTimeReconnect = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                                     FanControl.Disconnect();
                                 }
@@ -113,10 +125,10 @@ namespace MyFanControl.core
                             else
                             {
                                 Program.MenuGui?.SetState(false);
-                                if (DateTimeOffset.Now.ToUnixTimeMilliseconds() - _lastTimeReconnect > 60000)
+                                if (DateTimeOffset.Now.ToUnixTimeMilliseconds() - _lastTimeReconnect > 30000)
                                 {
                                     _lastTimeReconnect = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                                    Program.MenuGui?.BallonText("Reconnecting...");
+                                    Program.MenuGui?.BalloonText("Reconnecting...");
                                     Reconnect();
                                 }
                             }
@@ -160,13 +172,12 @@ namespace MyFanControl.core
             {
                 if (hardwareItem.HardwareType != HardwareType.CPU) continue;
                 hardwareItem.Update();
-                foreach (var subHardware in hardwareItem.SubHardware)
-                    subHardware.Update();
+
                 foreach (var sensor in hardwareItem.Sensors)
                 {
                     if (sensor.SensorType == SensorType.Temperature && sensor.Value.HasValue)
                     {
-                        maxTemp = Math.Max(maxTemp, (int)sensor.Value.Value);
+                        maxTemp = Math.Max(maxTemp, (int)Math.Ceiling(sensor.Value.Value));
                     }
                 }
             }
@@ -197,7 +208,7 @@ namespace MyFanControl.core
                 Process app2 = new Process { StartInfo = { FileName = Config.Setting.PathApp2 } };
                 app2.Start();
 
-                Thread.Sleep(10000);
+                Thread.Sleep(120000);
 
                 app1.Kill();
                 app2.Kill();

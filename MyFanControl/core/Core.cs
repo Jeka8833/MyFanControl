@@ -21,7 +21,7 @@ namespace MyFanControl.core
             Reconnect();
 
             new Thread(ThreadStart) { IsBackground = true }.Start();
-            new Thread(AppStart) { IsBackground = true }.Start();
+            AppStart();
 
             SystemEvents.PowerModeChanged += OnPowerChange;
         }
@@ -89,7 +89,7 @@ namespace MyFanControl.core
                                 {
                                     maxTemp = Math.Max(maxTemp, value);
                                 }
-                                
+
                                 FanControl.SetSpeed(Fan.ChipsetFan, Config.Setting.ChipsetFanSpeed);
                                 if (Config.Setting.CpuFan.MotherboardControl)
                                 {
@@ -187,31 +187,52 @@ namespace MyFanControl.core
 
         private static void OnPowerChange(object s, PowerModeChangedEventArgs e)
         {
-            try
-            {
-                if (e.Mode == PowerModes.Resume)
-                    new Thread(AppStart) { IsBackground = true }.Start();
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
+            if (e.Mode == PowerModes.Resume) AppStart();
         }
 
         private static void AppStart()
         {
             try
             {
-                Process app1 = new Process { StartInfo = { FileName = Config.Setting.PathApp1 } };
-                app1.Start();
+                if (Config.Setting.PathApp1.Length > 0)
+                {
+                    new Thread(() =>
+                    {
+                        try
+                        {
+                            var app1 = new Process { StartInfo = { FileName = Config.Setting.PathApp1 } };
+                            app1.Start();
 
-                Process app2 = new Process { StartInfo = { FileName = Config.Setting.PathApp2 } };
-                app2.Start();
+                            Thread.Sleep(120000);
 
-                Thread.Sleep(120000);
+                            app1.Kill();
+                        }
+                        catch (Exception)
+                        {
+                            // ignored
+                        }
+                    }) { IsBackground = true }.Start();
+                }
 
-                app1.Kill();
-                app2.Kill();
+                if (Config.Setting.PathApp2.Length > 0)
+                {
+                    new Thread(() =>
+                    {
+                        try
+                        {
+                            var app1 = new Process { StartInfo = { FileName = Config.Setting.PathApp2 } };
+                            app1.Start();
+
+                            Thread.Sleep(120000);
+
+                            app1.Kill();
+                        }
+                        catch (Exception)
+                        {
+                            // ignored
+                        }
+                    }) { IsBackground = true }.Start();
+                }
             }
             catch (Exception)
             {
